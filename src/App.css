@@ -4,6 +4,23 @@
   box-sizing: border-box;
 }
 
+:root {
+  color-scheme: only light;
+}
+
+html, body {
+  background-color: #ffffff;
+  color: #0f172a; /* or your --ink var */
+}
+
+/* for iOS autofill / dark-mode inversion */
+input, textarea, select, button {
+  background: #ffffff;
+  color: #0f172a;
+  -webkit-text-fill-color: #0f172a;
+}
+
+
 :root{
   --fg:#ffffff;           
   --ink:#203c2c;          
