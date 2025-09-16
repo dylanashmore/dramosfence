@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import ContactBar from "./components/ContactBar";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <Router>
       <div className="app">
+        <ScrollToTop />
         <Nav />
         <main className="page">
           <Routes>
