@@ -43,7 +43,7 @@ export default function Home() {
             <div>
               <h2>Local Experience</h2>
               <p>
-                With years of experience in Central Florida, we understand the
+                With years of experience in Florida, we understand the
                 climate, permitting process, and what works best for Tampa homes
                 and businesses.
               </p>
@@ -206,8 +206,8 @@ export default function Home() {
             <h3>Residential & Commercial</h3>
 
             <p>
-              From charming wood privacy fences to durable chain link for
-              businesses, Ramos Fencing offers solutions tailored to your exact
+              From classic wood privacy fences to steel
+              , Ramos Fencing offers solutions tailored to your exact
               needs. Our catalog includes wood, vinyl (PVC), aluminum, steel, and
               chain link — each installed with precision and care.
             </p>
