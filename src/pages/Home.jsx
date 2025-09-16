@@ -15,9 +15,9 @@ export default function Home() {
              Our team works closely with you to design a solution that protects what matters most while
               enhancing the look of your space.
           </p>
-          <a className="btn" href="/contact">
-              Connect With Us
-            </a>
+          <Link className="btn" to="/contact">
+            Connect With Us
+          </Link>
         </div>
       </section>
 
@@ -157,9 +157,9 @@ export default function Home() {
               confidence.
             </p>
 
-            <a className="btn-cta" href="/contact">
+                        <Link className="btn-cta" to="/contact">
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -187,7 +187,9 @@ export default function Home() {
         control, ensuring convenience, safety, and durability with every installation.
       </p>
 
-      <a className="btn-cta" href="/services">Explore Services</a>
+                 <Link className="btn-cta" to="/services">
+              Explore Services
+            </Link>
     </div>
   </div>
 </section>

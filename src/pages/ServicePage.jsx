@@ -1,4 +1,4 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, Link} from "react-router-dom";
 import { getService } from "../data/servicesData";
 import { galleryUrlsBySlug } from "../data/serviceGalleries"; 
 import MiniGallery from "../components/MiniPortfolio";
@@ -48,7 +48,9 @@ export default function ServicePage() {
               <h1 className="svc-title">{svc.title}</h1>
               <p className="svc-lead">{svc.intro}</p>
               <div className="svc-cta-row">
-                <a className="btn-cta" href="/contact">Contact Us For A Quote</a>
+                 <div className="svc-cta-row">
+    <Link className="btn-cta" to="/contact">Contact Us For A Quote</Link>
+  </div>
               </div>
             </header>
 
