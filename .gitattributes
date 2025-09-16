@@ -1,5 +1,4 @@
 # --- Use LFS only for source assets (all types) ---
-src/assets/** filter=lfs diff=lfs merge=lfs -text
 
 # --- Never use LFS in public (serve-ready files) ---
 public/** -filter -diff -merge -text
