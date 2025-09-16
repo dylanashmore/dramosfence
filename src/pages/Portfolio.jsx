@@ -27,6 +27,17 @@ export default function Portfolio() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  useEffect(() => {
+  if (IMAGES.length < 2) return;
+  const nextIdx = (i + 1) % IMAGES.length;
+  const prevIdx = (i - 1 + IMAGES.length) % IMAGES.length;
+  [IMAGES[nextIdx], IMAGES[prevIdx]].forEach((src) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src;
+  });
+}, [i]);
+
   const onTouchStart = e => { touch.current = { x: e.touches[0].clientX, active: true }; };
   const onTouchMove  = e => {
     if (!touch.current.active) return;

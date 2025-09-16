@@ -19,6 +19,17 @@ export default function MiniPortfolio({ images = [], fallbackImg }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  useEffect(() => {
+  if (safe.length < 2) return;
+  const nextIdx = (i + 1) % safe.length;
+  const prevIdx = (i - 1 + safe.length) % safe.length;
+  [safe[nextIdx], safe[prevIdx]].forEach((src) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src;
+  });
+}, [i, safe]);
+
   // touch swipe
   const onTouchStart = (e) => {
     touch.current = { x: e.touches[0].clientX, active: true };
