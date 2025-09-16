@@ -3,20 +3,14 @@ import { useEffect, useRef, useState } from "react";
 export default function MiniPortfolio({ images = [], fallbackImg }) {
   const safe = images?.length ? images : (fallbackImg ? [fallbackImg] : []);
   const [i, setI] = useState(0);
-  const [displaySrc, setDisplaySrc] = useState(safe[0] || ""); // what we actually render
+  const [displaySrc, setDisplaySrc] = useState(safe[0] || ""); // render this to avoid flicker
   const trackRef = useRef(null);
-  const touch = useRef({ x: 0, active: false });
+  const drag = useRef({ active: false, startX: 0, id: null });
 
   const prev = () => setI((n) => (n - 1 + safe.length) % safe.length);
   const next = () => setI((n) => (n + 1) % safe.length);
 
-  // If the image list changes (new service), reset shown image
-  useEffect(() => {
-    if (safe.length) setDisplaySrc(safe[0]);
-    setI(0);
-  }, [safe]);
-
-  // Keyboard
+  // Keyboard (same as Portfolio)
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowLeft") prev();
@@ -26,23 +20,29 @@ export default function MiniPortfolio({ images = [], fallbackImg }) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Warm up first few on mount / when list changes
+  // Reset when the gallery list changes (new service)
+  useEffect(() => {
+    setI(0);
+    setDisplaySrc(safe[0] || "");
+  }, [safe]);
+
+  // Warm up first few
   useEffect(() => {
     const n = Math.min(3, safe.length);
     for (let k = 0; k < n; k++) {
-      const img = new Image();
-      img.decoding = "async";
-      img.src = safe[k];
+      const im = new Image();
+      im.decoding = "async";
+      im.src = safe[k];
     }
   }, [safe]);
 
-  // Preload ±2 neighbors whenever index changes
+  // Preload ±2 neighbors
   useEffect(() => {
     if (safe.length < 2) return;
     [1, 2].forEach((d) => {
-      const nextIdx = (i + d) % safe.length;
-      const prevIdx = (i - d + safe.length) % safe.length;
-      [safe[nextIdx], safe[prevIdx]].forEach((src) => {
+      const a = (i + d) % safe.length;
+      const b = (i - d + safe.length) % safe.length;
+      [safe[a], safe[b]].forEach((src) => {
         const im = new Image();
         im.decoding = "async";
         im.src = src;
@@ -50,36 +50,35 @@ export default function MiniPortfolio({ images = [], fallbackImg }) {
     });
   }, [i, safe]);
 
-  // ✨ NO-FLICKER SWAP: preload+decode target before we switch displaySrc
+  // No-flicker swap: decode new target before switching what we render
   useEffect(() => {
     const target = safe[i];
     if (!target || target === displaySrc) return;
-
     const im = new Image();
     im.src = target;
-
     const apply = () => setDisplaySrc(target);
-    if (im.decode) {
-      im.decode().then(apply).catch(apply);
-    } else {
-      im.onload = apply;
-      im.onerror = apply;
-    }
+    if (im.decode) im.decode().then(apply).catch(apply);
+    else { im.onload = apply; im.onerror = apply; }
   }, [i, safe, displaySrc]);
 
-  // Touch swipe
-  const onTouchStart = (e) => { touch.current = { x: e.touches[0].clientX, active: true }; };
-  const onTouchMove  = (e) => {
-    if (!touch.current.active) return;
-    const dx = e.touches[0].clientX - touch.current.x;
-    if (trackRef.current) trackRef.current.style.transform = `translateX(${dx * 0.15}px)`;
+  // Pointer-based swipe (works on touch + mouse)
+  const onPointerDown = (e) => {
+    drag.current = { active: true, startX: e.clientX, id: e.pointerId };
+    e.currentTarget.setPointerCapture?.(e.pointerId);
   };
-  const onTouchEnd = (e) => {
-    if (!touch.current.active) return;
-    const dx = (e.changedTouches?.[0]?.clientX || 0) - touch.current.x;
+  const onPointerMove = (e) => {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(${dx * 0.15}px)`;
+    }
+  };
+  const onPointerFinish = (e) => {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
     if (trackRef.current) trackRef.current.style.transform = "translateX(0)";
-    touch.current.active = false;
-    if (Math.abs(dx) > 50) (dx > 0 ? prev : next)();
+    drag.current.active = false;
+    if (Math.abs(dx) > 50) (dx > 0 ? prev() : next());
   };
 
   if (!safe.length) return null;
@@ -91,14 +90,15 @@ export default function MiniPortfolio({ images = [], fallbackImg }) {
 
         <div
           className="mini-pf-viewport"
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerFinish}
+          onPointerCancel={onPointerFinish}
           style={{ touchAction: "pan-y" }}
         >
           <div className="mini-pf-track" ref={trackRef}>
             <img
-              src={displaySrc}                 // stays on previous until next is decoded
+              src={displaySrc}              // stays on old image until next is decoded
               alt="Project photo"
               decoding="async"
               {...(i === 0 ? { fetchPriority: "high" } : {})}
