@@ -14,10 +14,13 @@ html, body {
 }
 
 /* for iOS autofill / dark-mode inversion */
-input, textarea, select, button {
+input, textarea, select {
   background: #ffffff;
   color: #0f172a;
-  -webkit-text-fill-color: #0f172a;
+}
+
+button{
+  -webkit-text-fill-color: white;
 }
 
 
@@ -845,7 +848,7 @@ color: #fff;;
 .contact-form .btn-cta{
   background: #ffffff;       
   border: 2px solid #1059a9;  
-  color: #1059a9;            
+  color: white;            
   border-radius: 999px;
   padding: 12px 22px;
   font-weight: 700;
@@ -1335,7 +1338,7 @@ color: #fff;;
 .contact-form .btn-cta{
   background: #fff;
   border: 2px solid var(--ink);
-  color: var(--ink);
+  color: white;
 }
 .contact-form .btn-cta:hover{
   background: var(--ink);
@@ -1345,7 +1348,7 @@ color: #fff;;
 .contact-form .btn-outline{
   border: 1px solid #dbe4f3;
   background: rgba(255,255,255,.95);
-  color: var(--ink);
+  color: white;
 }
 .contact-form .btn-outline:hover{
   border-color: var(--ink);
@@ -1523,6 +1526,8 @@ a:hover{ text-decoration-thickness: 2px; text-underline-offset: 3px; }
 }
 
 .pf-arrow:hover {opacity: 1; color: #a8cc34;}
+
+
 
 /* ---------- Desktop defaults ---------- */
 .mobile-menu{ display:none; }
@@ -2601,3 +2606,34 @@ html, body, #root { height: 100%; }          /* allow 100% height calculations *
 :root {
   color-scheme: only light;
 }
+
+/* Contact form CTA button */
+.contact-form .btn-cta {
+  display: block;              /* takes full line */
+  width: 100%;                 /* match input width */
+  max-width: 320px;            /* cap it so it doesn’t stretch too wide on desktop */
+  margin: 1rem auto 0;         /* center horizontally */
+  
+  background: white;         /* brand green */
+  color: #203c2c;
+  -webkit-text-fill-color: #203c2c;
+
+  border: none;
+  border-radius: 10px;         /* match input radius */
+  padding: 1rem;               /* make it taller */
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.contact-form .btn-cta:hover {
+  background: #84cc16;
+    color: #fff;
+  -webkit-text-fill-color: #fff; /* ensures iOS Safari stays white */
+}
+
+.contact-form .btn-cta:active {
+  transform: translateY(1px);
+}
+
