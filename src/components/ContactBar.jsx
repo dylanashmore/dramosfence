@@ -6,10 +6,22 @@ export default function ContactBar() {
         <nav className="footer-links">
           <Link className="cta-link" to="/contact">Contact Here</Link>
           <a href="mailto:dramos@enterprisesllc.net">Email: dramos@enterprisesllc.net</a>
-          <a href="tel:+18132970747">Phone: (813) 297-0747</a>
-          <a href="tel:+18137540496">Fax: (813) 754-0496</a>
+          <a href="tel:+18132970747">Office Phone / Fax: (813) 297-0747</a>
+          <a href="tel:+18137679726">Alt. Phone: (813) 767-9726</a>
         </nav>
         <p className="credits">© {new Date().getFullYear()} D. Ramos Enterprises. All rights reserved.</p>
+       <p className="me">
+  Design & Code by{" "}
+  <a
+    className="me-link"
+    href="https://dylanashmore.com"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Dylan Ashmore
+  </a>
+</p>
+
       </div>
     </footer>
   );

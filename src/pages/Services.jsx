@@ -37,7 +37,7 @@ export default function ServicesSection() {
 
         <div className="carousel-wrap">
           <button className="svc-nav svc-left" aria-label="Previous" onClick={() => scrollByCard(-1)}>
-            &lsaquo;
+            
           </button>
 
           <div className="track" ref={trackRef}>
@@ -95,7 +95,6 @@ export default function ServicesSection() {
           </div>
 
           <button className="svc-nav svc-right" aria-label="Next" onClick={() => scrollByCard(1)}>
-            &rsaquo;
           </button>
         </div>
       </div>
