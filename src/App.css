@@ -1708,6 +1708,275 @@ html, body{ overflow-x:hidden; }
   .nav-toggle.is-open svg{ display:none; }
 }
 
+.map { text-align: left; padding: 56px 0; background:#f4f8f0 !important;; }
+.map-section{  background: #f4f8f0 !important;; }
+.map h2{
+  font-family:"Merriweather", Georgia, "Times New Roman", serif;
+  font-weight:600;
+  line-height:1.15;
+  font-size: clamp(2rem, 3.5vw, 8rem);
+  margin:0 0 1rem;
+  color:#3c3c3c;
+  letter-spacing:.2px;
+}
+.map .brand-accent{ color:#203c2c; font-weight:700; }
+.map p{
+  font-size:1.2rem;
+  line-height:1.8;
+  color:#4a4f57;
+  margin:0 0 1rem;
+  max-width:58ch;
+  margin-inline:auto;
+}
+
+.map .brand-accent{ color: var(--ink); }
+.service-areas-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem 1.5rem;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: start;
+  text-align: left; /* override .map text-align center */
+}
+
+.service-areas-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  column-gap: clamp(1rem, 3vw, 2.5rem);
+  row-gap: .85rem;
+}
+
+.service-areas-grid li {
+  display: flex;
+  align-items: baseline;
+  color: #26382d;
+}
+
+.service-areas-grid li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #203C2C;
+  margin-right: 0.5rem;
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.map-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.counties-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem auto;
+  text-align: center;   /* centers the items under the heading */
+  display: inline-block; /* keeps list width tight to its content */
+}
+
+.counties-list li {
+  font-size: clamp(1.2rem, 1rem + 0.5vw, 1.6rem);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #203c2c;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.counties-list li::before {
+content: "";
+  display: inline-block;
+  width: 20px;      /* adjust size */
+  height: 20px;     /* adjust size */
+  margin-right: 0.6rem;
+  background: url("/marker.png") no-repeat center center;
+  background-size: contain;
+}
+
+
+@media (max-width: 980px) {
+  .map-grid { grid-template-columns: 1fr; }
+  .map-right { order: -1; } /* puts image above cities on mobile */
+  .service-areas-grid ul { grid-template-columns: 1fr; }
+}
+
+
+
+.map-image {
+  width: 100%;
+  max-width: 600px;     /* increase this for bigger image (try 560px or 600px) */
+  height: auto;
+  object-fit: contain;  /* keeps proportions clean */
+  border-radius: 0;     /* no rounded corners */
+  box-shadow: none;     /* no shadow background */
+  background: transparent; /* kill fallback bg */
+  margin-top: -20px;    /* nudge image upward */
+}
+
+@media (max-width: 900px) {
+  .map-grid {
+    grid-template-columns: 1fr;
+  }
+  .map-right {
+    order: -1; /* put image above list on mobile */
+  }
+}
+
+.map-grid{
+  display: grid;
+  grid-template-columns: 1.1fr minmax(520px, 680px); /* give the image a wider column */
+  gap: clamp(16px, 3vw, 40px);
+  align-items: start;
+}
+
+/* align the RIGHT column to the top-right and nudge it */
+.map-right{
+  place-self: start end;           /* align-self: start + justify-self: end */
+  transform: translate(12px, -28px); /* → right 12px, ↑ up 28px */
+}
+
+/* image itself: big, clean, no bg */
+.map-image{
+  display: block;
+  width: 100%;
+  max-width: 600px;     /* make it bigger; adjust as you like */
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* tighten list under the title a bit */
+.counties-list{ margin: .8rem 0 1.4rem; }
+.counties-list li{
+   font-size: clamp(1.1rem, 0.9rem + 0.5vw, 1.4rem);
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+  color: #203c2c;
+  display: flex;
+  align-items: center;
+}
+.map-grid {
+  display: grid;
+  grid-template-columns: auto auto;  /* let content size itself */
+  justify-content: space-between;    /* spread list + image */
+  align-items: start;                /* align items to top */
+  gap: 2rem;
+}
+
+/* counties list stays left */
+.counties-list {
+  margin: 0.8rem 0 1.5rem;
+  padding: 0;
+  margin: 2rem auto;
+  text-align: left;
+}
+
+/* make image larger but don't stretch section */
+.map-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;  /* keeps it at the top */
+}
+
+.map-image {
+  max-width: 480px;   /* increase/decrease here for bigger/smaller */
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  margin-top: -40px;  /* nudge upward */
+  margin-right: -50px; /* nudge farther right */
+}
+
+.counties-list li::before {
+content: "";
+  display: inline-block;
+  width: 20px;      /* adjust size */
+  height: 20px;     /* adjust size */
+  margin-right: 0.6rem;
+  background: url("/marker.png") no-repeat center center;
+  background-size: contain;
+}
+/* ensure bullets are hidden */
+.counties-list { list-style: none; padding: 0; margin-top: 0.75rem;   /* pull it closer to header */
+  margin-bottom: 1.5rem;  }
+
+/* each row */
+.counties-list li{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #203c2c;
+  margin-bottom: 0.01rem;
+  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
+}
+
+/* the marker icon */
+.map .counties-list li::before{
+  content: "";
+  display: inline-block;
+  width: 50px;              /* tweak size */
+  height: 50px;
+  margin-right: 0.6rem;
+
+  background-image: url("/marker.png");  /* served from /public */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+
+
+/* mobile: stack with image on top */
+@media (max-width: 900px){
+  .map-grid{ grid-template-columns: 1fr; }
+  .map-right{ order: -1; transform: none; }
+   .map-image {
+    max-width: 280px;    /* shrink image on mobile */
+    margin: 1.5rem 2rem 0; /* push it down and center */
+    display: block;
+  }
+  .map h2{
+    text-align: center;
+  }
+
+  .counties-list {
+    margin: 1.25rem 3.5rem 0;     /* centers the list block */
+    max-width: 420px;           /* nice readable width */
+    width: 90%;                 /* shrink a bit on small phones */
+    text-align: center;           /* keep text left */
+  }
+
+  .counties-list li {
+    justify-content: flex-start;  /* marker + text stay left in the row */
+    gap: .6rem;                   /* optional: small space between marker & text */
+  }
+}
+
+
+
 /* ===================== MOBILE ONLY (≤480px) ===================== */
 @media (max-width: 480px){
 

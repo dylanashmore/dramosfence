@@ -33,8 +33,8 @@ export default function Home() {
             <div>
               <h2>Quality Craftsmanship</h2>
               <p>
-                Every fence is built with care using durable, weather-resistant
-                materials to ensure long-term strength and style.
+                Every fence is built with care using durable, weather resistant
+                materials to ensure strength and style over the long term.
               </p>
             </div>
           </div>
@@ -104,22 +104,22 @@ export default function Home() {
         <div className="container about-wrap">
           <div className="about">
             <h2>
-              <span className="brand-accent">Ramos Fencing:</span>{" "}
+              <span className="brand-accent">D. Ramos Fence:</span>{" "}
             </h2>
             <h3>Top Choice In Florida</h3>
 
             <p>
-              At Ramos Fencing, we believe a fence should do more than mark a
+              At D. Ramos Enterprises, we believe a fence should do more than mark a
               boundary. It should provide peace of mind, enhance curb appeal, and
-              add value to your property. That’s why we combine top-tier
-              materials with hands-on expertise to deliver fences that look great
+              add value to your property. That’s why we combine top tier
+              materials with hands on expertise to deliver fences that look great
               and last for years.
             </p>
 
             <p>
               Whether you’re securing a backyard, upgrading a business, or adding
               privacy to your home, we have the tools and knowledge to make it
-              happen — all with clear communication and dependable service.
+              happen.
             </p>
 
             <Link className="btn-cta" to="/portfolio">
@@ -146,9 +146,9 @@ export default function Home() {
             </h2>
 
             <p>
-              Every property is unique — and so are your goals. Need privacy for
-              your backyard? Security for your business? Or just a fence that
-              looks as good as it performs? We’ve got you covered.
+              Every property is unique, and so are your goals. Whether you need privacy for
+              your backyard, security for your business, or simply a fence that
+              looks as good as it performs, we’ve got you covered.
             </p>
 
             <p>
@@ -177,9 +177,9 @@ export default function Home() {
 
     <div className="gates-copy">
       <p>
-        We design and install gates for every property type from elegant driveway
-        entrances to heavy-duty commercial security systems. Our options include
-        wood, aluminum, steel, and all custom-built gates tailored to your space.
+        We design and install gates for every property type, from driveway entrances to 
+        commercial security systems. Our options include a 
+        wide range of durable materials as well as fully custom built gates tailored to your needs.
       </p>
       <p>
         Pair your gate with a reliable motorized system for seamless access. We
@@ -206,10 +206,8 @@ export default function Home() {
             <h3>Residential & Commercial</h3>
 
             <p>
-              From classic wood privacy fences to steel
-              , Ramos Fencing offers solutions tailored to your exact
-              needs. Our catalog includes wood, vinyl (PVC), aluminum, steel, and
-              chain link — each installed with precision and care.
+             From classic wood privacy fences to durable steel, we provide solutions tailored to your exact needs.
+              Our catalog features wood, vinyl (PVC), aluminum, steel, and chain link options.
             </p>
 
             <p>
@@ -231,6 +229,36 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* MAP */}
+      <section id="map" className="map-section">
+  <div className="container">
+    <div className="map">
+      <h2><span className="brand-accent">Service Areas</span></h2>
+
+      <div className="map-grid">
+        {/* LEFT */}
+        <div className="map-left">
+          <ul className="counties-list">
+            <li>Hernando County, FL</li>
+            <li>Pasco County, FL</li>
+            <li>Hillsborough County, FL</li>
+            <li>Pinellas County, FL</li>
+            <li>Polk County, FL</li>
+            <li>Manatee County, FL</li>
+            <li>Sarasota County, FL</li>
+          </ul>
+        </div>
+
+        {/* RIGHT */}
+        <div className="map-right">
+          <img src="/map.png" alt="Service area map" className="map-image" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     </>
   );

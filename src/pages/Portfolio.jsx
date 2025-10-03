@@ -106,8 +106,7 @@ export default function Portfolio() {
 
             <div className="pf-mobile-copy">
         <p>
-          Ready for ideas? Browse our recent jobs—fences and gates in every style,
-          installed across Florida. Each project is planned for your property’s grade
+          Ready for ideas? Browse our recent jobs. Each project is planned for your property’s grade
           and daily use so it looks right and works from day one. Use the slider to
           explore, then tell us which styles you’re drawn to when you request a quote.
         </p>

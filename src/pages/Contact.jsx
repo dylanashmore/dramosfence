@@ -26,7 +26,7 @@ export default function Contact() {
           <h1>Contact Us</h1>
           <p>
             Prefer to talk?{" "}
-            <a href="tel:18132970747" className="phone-link" aria-label="Call us at 813-297-0747">
+            <a href="tel:18137540496" className="phone-link" aria-label="Call us at 813-754-0496">
               Call us at <strong>(813) 297-0747</strong>
             </a>
           </p>
