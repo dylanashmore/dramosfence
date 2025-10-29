@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { getService } from "../data/servicesData";
 import { galleryUrlsBySlug } from "../data/serviceGalleries";
 import MiniGallery from "../components/MiniPortfolio";
-import { useForm, ValidationError } from "@formspree/react"; // <-- add this
 
 const displayNameFor = (svc) =>
   svc?.title?.replace(/\s*Fences?$/i, "").trim() ||
@@ -14,15 +14,51 @@ export default function ServicePage() {
   if (!svc) return <Navigate to="/services" replace />;
 
   const heroImg = svc.hero || svc.cardImg;
-
   const folderImgs = galleryUrlsBySlug?.[slug] || [];
   const images =
     (folderImgs.length && folderImgs) ||
     (svc.gallery?.length && svc.gallery) ||
     [heroImg];
 
-  // ---- Formspree hook for the sidebar mini-form ----
-  const [inqState, handleInquirySubmit] = useForm("xwpngpgy");
+  const [inqSubmitting, setInqSubmitting] = useState(false);
+  const [inqSucceeded, setInqSucceeded] = useState(false);
+  const [inqErrors, setInqErrors] = useState(null);
+
+  const API_BASE = import.meta.env.VITE_API_BASE || "";
+
+  const handleInquirySubmit = async (e) => {
+    e.preventDefault();
+    setInqSubmitting(true);
+    setInqErrors(null);
+
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    // add context if missing
+    if (!data.serviceTitle) data.serviceTitle = svc.title;
+    if (!data.formSource) data.formSource = "ServicePage sidebar";
+    if (!data.serviceSlug) data.serviceSlug = slug;
+
+    try {
+      const r = await fetch(`${API_BASE}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        throw new Error(err.error || "Network response was not ok");
+      }
+
+      setInqSucceeded(true);
+      form.reset();
+    } catch (err) {
+      console.error("Inquiry submit failed:", err);
+      setInqErrors("There was a problem sending your message. Please check the fields and try again.");
+    } finally {
+      setInqSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -73,7 +109,7 @@ export default function ServicePage() {
               <p className="inq-eyebrow">Ready to Go?</p>
               <h3 className="inq-title">Let's Build Your Fence.</h3>
 
-              {inqState.succeeded ? (
+              {inqSucceeded ? (
                 <p className="form-status success" aria-live="polite">
                   Thanks! We received your message.
                   We’ll reach out shortly.
@@ -108,27 +144,19 @@ export default function ServicePage() {
                     <span>Email *</span>
                     <input id="inq-email" type="email" name="email" required placeholder="you@email.com" autoComplete="email" />
                   </label>
-                  <ValidationError prefix="Email" field="email" errors={inqState.errors} />
 
                   <label>
                     <span>Message</span>
-                    <textarea
-                      id="inq-message"
-                      name="message"
-                      rows={4}
-                      placeholder={`Tell us about your project`}
-                      required
-                    />
+                    <textarea id="inq-message" name="message" rows={4} placeholder="Tell us about your project" required />
                   </label>
-                  <ValidationError prefix="Message" field="message" errors={inqState.errors} />
 
-                  <button className="btn-cta" type="submit" disabled={inqState.submitting} aria-busy={inqState.submitting}>
-                    {inqState.submitting ? "Sending…" : "Send"}
+                  <button className="btn-cta" type="submit" disabled={inqSubmitting} aria-busy={inqSubmitting}>
+                    {inqSubmitting ? "Sending…" : "Send"}
                   </button>
 
-                  {inqState.errors?.length > 0 && (
+                  {inqErrors && (
                     <p className="form-status error" aria-live="polite">
-                      There was a problem sending your message. Please check the fields and try again.
+                      {inqErrors}
                     </p>
                   )}
                 </form>
