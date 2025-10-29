@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
     await resend.emails.send({
       from: 'D. Ramos Fence <contact@dramosfence.com>', // ✅ now fully verified
-      to: ['dylanbaseball97@gmail.com'],                // where you’ll get the message
+      to: ['dramos@enterprisesllc.net'],                // where you’ll get the message
       reply_to: email,                                  // reply goes straight to the user
       subject: `New Inquiry from ${fullName}`,
       text: `
