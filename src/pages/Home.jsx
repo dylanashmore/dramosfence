@@ -10,10 +10,9 @@ export default function Home() {
         <div className="container center">
           <h1 className="headline">D. RAMOS ENTERPRISES: Fencing You Can Trust</h1>
           <p className="sub">
-            As a locally owned and operated company, we pride ourselves in serving Florida’s 
-            communities with fences and gates that balance durability, aesthetics, and affordability.
-             Our team works closely with you to design a solution that protects what matters most while
-              enhancing the look of your space.
+As a locally owned and operated company, we proudly serve the greater Tampa Bay area and surrounding Florida counties, including Hernando, Pasco, Hillsborough, Pinellas, Polk, Manatee, and Sarasota County.
+            Our team provides high-quality fence and gate solutions for homes and businesses, combining durability, aesthetics, and affordability.
+From Tampa and St. Petersburg to Lakeland, Bradenton, Sarasota, and nearby communities, we work closely with every customer to design a fence or gate that protects what matters most while enhancing the look of their property.
           </p>
           <Link className="btn" to="/contact">
             Connect With Us
