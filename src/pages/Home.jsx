@@ -10,8 +10,8 @@ export default function Home() {
         <div className="container center">
           <h1 className="headline">D. RAMOS ENTERPRISES: Fencing You Can Trust</h1>
           <p className="sub">
-            As a locally owned and operated company, we pride ourselves in serving Florida’s 
-            communities with fences and gates that balance durability, aesthetics, and affordability.
+            As a locally owned and operated company, we pride ourselves in serving 
+            communities across the Tampa Bay area with fences and gates that balance durability, aesthetics, and affordability.
              Our team works closely with you to design a solution that protects what matters most while
               enhancing the look of your space.
           </p>
