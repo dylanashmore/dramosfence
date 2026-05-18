@@ -16,7 +16,7 @@ export default function Home() {
               enhancing the look of your space.
           </p>
           <Link className="btn" to="/contact">
-            Connect With Us
+            Get a Quote
           </Link>
         </div>
       </section>
